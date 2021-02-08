@@ -5,7 +5,7 @@ class DatabaseSeeder {
   async run () {
     const user = await User.create({
       name:'Ernesto Maria',
-      email:'emaria8@gmail.com',
+      email:'emaria1@gmail.com',
       password:'123456'
     })
 

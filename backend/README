@@ -13,3 +13,5 @@ adonis make:model Invite -m -c
 
 instalação do slugify
 
+npm install --save adonis-kue // serve para o envio de email
+
