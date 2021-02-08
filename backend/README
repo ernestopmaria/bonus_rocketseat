@@ -10,3 +10,6 @@ adonis make:model Project -m -c
 adonis make:model Team -m -c
 adonis make:model UserTeam -m
 adonis make:model Invite -m -c
+
+instalação do slugify
+
