@@ -1,0 +1,12 @@
+#Aplicaçáo SAAS
+
+#comando usandos durante a criação do projecto
+npm i -g @adonisjs/cli
+adonis new backend --api-only
+
+adonis -> para consultar os comandos
+
+adonis make:model Project -m -c
+adonis make:model Team -m -c
+adonis make:model UserTeam -m
+adonis make:model Invite -m -c
