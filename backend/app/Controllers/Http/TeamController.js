@@ -1,12 +1,7 @@
 'use strict'
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
+const Role = use('Adonis/Acl/Role')
 
-/**
- * Resourceful controller for interacting with teams
- */
 class TeamController {
   /**
    * Show a list of all teams.
@@ -35,6 +30,12 @@ class TeamController {
       ...data,
       user_id:auth.user.id,
     })
+
+    const teamJoin = await auth.user.teamJoins().where('team_id',team.id).first()
+
+    const admin = await Role.findBy('slug', 'administrator')
+    await teamJoin.roles().attach([admin.id])
+
     return team
   }
 
@@ -44,6 +45,9 @@ class TeamController {
      */
   async show ({params,auth }) {
     const team = await auth.user.teams().where('teams.id', params.id).first()
+
+
+    await teamJoin.roles().attach
 
     return team
   }

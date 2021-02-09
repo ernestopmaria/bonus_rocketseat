@@ -16,14 +16,22 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('sessions', 'SessionController.store')
-Route.post('users', 'UserController.store')
+Route.post('sessions', 'SessionController.store').validator('Session')
+Route.post('users', 'UserController.store').validator('User')
+
 Route.group(()=>{
-  Route.resource('teams' , 'TeamController').apiOnly()
+  Route.get('roles', 'RoleController.index')
+  Route.resource('teams' , 'TeamController').apiOnly().validator(new Map([[['teams.store', 'teams.update'],['Team']]]))
 }).middleware('auth');
 
 Route.group(()=>{
-  Route.post('invites' , 'InviteController.store')
+  Route.post('invites' , 'InviteController.store').validator('Invite').middleware('can:invites_create')
 
   Route.resource('projects', 'ProjectController').apiOnly()
+  .validator(new Map([[['projects.store', 'projects.update'],['Project']]]))
+  .middleware(new Map([[['projects.store', 'projects.update'],['can:projects_create']]]))
+  Route.get('members', 'MemberController.index')
+  Route.put('members/:id', 'MemberController.update').middleware('is:administrator')
+
+  Route.get('permissions', 'PermissionController.show')
 }).middleware(['auth', 'team']);
