@@ -1,0 +1,33 @@
+{
+    "parser":"babel-eslint",
+    "extends":"airbnb",
+    "env":{
+        "browser": true,
+        "jest":true
+    },
+    "plugins": ["react", "jsx-a11y", "import"],
+    "rules":{
+             "react/react-in-jsx-scope": "off",
+            "linebreak-style": 0,
+            "global-require": 0,
+            "eslint linebreak-style": [0, "error", "windows"],
+
+        "react/jsx-filename-extension":[
+            "error",
+            {
+                "extensions":[".js", ".jsx"]
+            }
+        ],
+        "import/prefer-default-export":"off"
+    },
+    "settings": {
+        "import/resolver":{
+            "babel-plugin-root-import":{
+                "rootPathSuffix": "src",
+                "rootPathPrefix": "~"
+
+            }
+        }
+    }
+
+}
